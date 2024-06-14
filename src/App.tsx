@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 type ItemType = {
@@ -16,7 +16,7 @@ function App() {
     setInputs(prev => ({ ...prev, [name]: value }))
   }
 
-  const addItem = (e) => {
+  const addItem = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setList(prev => [
       ...prev,
@@ -29,9 +29,10 @@ function App() {
     setInputs(prev => ({ ...prev, add: "" }));
   }
 
-  const moveItem = (e) => {
+  const moveItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = (e.target as HTMLButtonElement).id;
     setList(prev => prev.map(
-      item => item._id === e.target.parentNode.id ?
+      item => item._id === id ?
       { ...item, list: item.list === 0 ? 1 : 0 } : item
     ))
   }
@@ -40,7 +41,6 @@ function App() {
     if (inputs.search.length > 0) {
       const matchIndex = text.indexOf(inputs.search);
       const match = text.substring(matchIndex, matchIndex + inputs.search.length);
-      console.log(match, matchIndex);
 
       return (
         <p>
@@ -69,11 +69,10 @@ function App() {
       {list.map(item => item.text.includes(inputs.search) && (
         <div
           key={item._id}
-          id={item._id}
           className={`listItem list${item.list}`}
         >
           {formatItemText(item.text)}
-          <button onClick={moveItem} className="moveBtn">
+          <button onClick={moveItem} className="moveBtn" id={item._id}>
             {item.list === 0 ? ">" : "<"}
           </button>
         </div>
