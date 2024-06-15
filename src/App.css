@@ -29,15 +29,18 @@ form {
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
   grid-auto-flow: dense;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .listItem {
-  background: #fcfcfc;
-  border: 1px solid #f4f4f4;
+  background: #292929;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
   padding: 0.3rem 0.5rem;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 
   p {
     margin: 0 auto;
@@ -60,6 +63,14 @@ form {
 
 .match {
   background: #FFFFCC;
+  color: #213547;
   font-weight: bold;
   border-radius: 8px;
+}
+
+@media (prefers-color-scheme: light) {
+  .listItem {
+    background: #fcfcfc;
+    border: 1px solid #f4f4f4;
+  }
 }
